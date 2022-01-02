@@ -10,42 +10,42 @@ typedef struct {
 	string name;
 	int flow;
 	int mid;
-}metro;
+}station;
 
 typedef struct {
-	metro detail[200];
+	station metro[200];
 	int length;
 }SqList;
 
-void CreateList(SqList* L, metro detail[]) {
-	L->detail[0].name = "郑州火车站";
-	L->detail[0].flow = rand()/20;
-	L->detail[0].mid = 1;
+void CreateList(SqList* L, station metro[]) {
+	L->metro[0].name = "郑州火车站";
+	L->metro[0].flow = rand()/20;
+	L->metro[0].mid = 1;
 
-	L->detail[1].name = "二七广场";
-	L->detail[1].flow = rand()/20;
-	L->detail[1].mid = 2;
+	L->metro[1].name = "二七广场";
+	L->metro[1].flow = rand()/20;
+	L->metro[1].mid = 2;
 
-	L->detail[2].name = "人民路";
-	L->detail[2].flow = rand()/20;
-	L->detail[2].mid = 3;
+	L->metro[2].name = "人民路";
+	L->metro[2].flow = rand()/20;
+	L->metro[2].mid = 3;
 
-	L->detail[3].name = "紫荆山";
-	L->detail[3].flow = rand()/20;
-	L->detail[3].mid = 4;
+	L->metro[3].name = "紫荆山";
+	L->metro[3].flow = rand()/20;
+	L->metro[3].mid = 4;
 
-	L->detail[4].name = "燕庄";
-	L->detail[4].flow = rand()/20;
-	L->detail[4].mid = 5;
+	L->metro[4].name = "燕庄";
+	L->metro[4].flow = rand()/20;
+	L->metro[4].mid = 5;
 	//L->length = sizeof(&L);
 	L->length = 5;
 }
 int Print(SqList* L,int i) {
-	cout << "地铁站ID:" << L->detail[i - 1].mid << endl;
-	cout << "地铁站名:" << L->detail[i - 1].name << endl;
+	cout << "地铁站ID:" << L->metro[i - 1].mid << endl;
+	cout << "地铁站名:" << L->metro[i - 1].name << endl;
 	switch (identity) {
 	case 1:
-		cout << "地铁站客流量:" << L->detail[i - 1].flow << endl;
+		cout << "地铁站客流量:" << L->metro[i - 1].flow << endl;
 	}
 	cout << "\n" << endl;
 	return 0;
@@ -60,15 +60,15 @@ int Printall(SqList* L) {
 int Printlist(SqList* L,unsigned i, unsigned o ) {
 	if (i >= o){
 		for (i; i>=o+1;i--) {
-			cout << L->detail[i - 1].name << "-->";
+			cout << L->metro[i - 1].name << "-->";
 		}
-		cout << L->detail[i - 1].name<<endl;
+		cout << L->metro[i - 1].name<<endl;
 	}
 	else if (i <= o-1) {
 		for (i; i <= o-1; i++) {
-			cout << L->detail[i - 1].name << "-->";
+			cout << L->metro[i - 1].name << "-->";
 		}
-		cout << L->detail[i - 1].name << endl;
+		cout << L->metro[i - 1].name << endl;
 	}
 	return 0;
 }
@@ -78,7 +78,7 @@ int Find(SqList* L, string station)
 	int i = 1;
 	bool find = 0;
 	for (i = 1; i <= L->length; i++) {
-		if (L->detail[i - 1].name == station) {
+		if (L->metro[i - 1].name == station) {
 			find = 1;
 			break;
 		}
@@ -94,6 +94,12 @@ int Find(SqList* L, string station)
 		break;
 	}
 
+}
+void search(SqList *L) {
+	string name;
+	cout << "请输入您要查找的站名" << endl;
+	cin >> name;
+	Find(L, name);
 }
 
 int Price(SqList* L) {
@@ -196,13 +202,13 @@ int edit(SqList* L) {
 		cin >> nname;
 		cout << "请输入新的客流量" << endl;
 		cin >> nflow;
-		cout << "站名：" << L->detail[sid - 1].name << "-->" << nname << endl;
-		cout << "客流：" << L->detail[sid - 1].flow << "-->" << nflow << endl;
+		cout << "站名：" << L->metro[sid - 1].name << "-->" << nname << endl;
+		cout << "客流：" << L->metro[sid - 1].flow << "-->" << nflow << endl;
 		cout << "确认要更改吗？y/n" << endl;
 		cin >> choice;
 		if (choice == "y") {
-			L->detail[sid - 1].name = nname;
-			L->detail[sid - 1].flow = nflow;
+			L->metro[sid - 1].name = nname;
+			L->metro[sid - 1].flow = nflow;
 			cout << "修改已保存"<<endl;
 		}
 		if (choice == "n") {
@@ -229,11 +235,11 @@ int adds(SqList* L){
 	cin >> choice;
 	if (choice == "y") {
 		for (int i = L->length; i >= sid; i--) {
-			L->detail[i] = L->detail[i - 1];
+			L->metro[i] = L->metro[i - 1];
 		}
-		L->detail[sid - 1].name = name;
-		L->detail[sid - 1].flow = flow;
-		L->detail[sid - 1].mid = sid;
+		L->metro[sid - 1].name = name;
+		L->metro[sid - 1].flow = flow;
+		L->metro[sid - 1].mid = sid;
 		L->length = L->length + 1;
 		cout << "已增加站点" << endl;
 	}
@@ -255,7 +261,7 @@ int remove(SqList* L) {
 	cin >> choice;
 	if (choice == "y") {
 		for (int i = sid; i < L->length; i++) {
-			L->detail[i-1] = L->detail[i];
+			L->metro[i-1] = L->metro[i];
 		}
 		L->length = L->length - 1;
 		cout << "已删除站点" << endl;
@@ -269,20 +275,20 @@ int remove(SqList* L) {
 
 int ShellSort(SqList Li, int n) {
 	int i, j, d;
-	metro tmp;
+	station tmp;
 	d = n / 2;
 	while (d > 0)
 	{
 		for (i = d; i < n; i++)
 		{
-			tmp = Li.detail[i];
+			tmp = Li.metro[i];
 			j = i - d;
-			while (j >= 0 && tmp.flow < Li.detail[j].flow)
+			while (j >= 0 && tmp.flow < Li.metro[j].flow)
 			{
-				Li.detail[j + d] = Li.detail[j];
+				Li.metro[j + d] = Li.metro[j];
 				j = j - d;
 			}
-			Li.detail[j + d] = tmp;
+			Li.metro[j + d] = tmp;
 		}
 		d = d / 2;
 	}
@@ -292,21 +298,21 @@ int ShellSort(SqList Li, int n) {
 
 int partition(SqList* Li,int s,int t) {
 	int i = s, j = t;
-	metro tmp = Li->detail[i];
+	station tmp = Li->metro[i];
 	while (i < j)
 	{
-		while (j > i && Li->detail[i].flow >= tmp.flow)
+		while (j > i && Li->metro[i].flow >= tmp.flow)
 		{
 			j--;
 		}
-		Li->detail[i] = Li->detail[j];
-		while (i < j && Li->detail[i].flow <= tmp.flow)
+		Li->metro[i] = Li->metro[j];
+		while (i < j && Li->metro[i].flow <= tmp.flow)
 		{
 			i++;
 		}
-		Li->detail[j] = Li->detail[i];
+		Li->metro[j] = Li->metro[i];
 	}
-	Li->detail[i] = tmp;
+	Li->metro[i] = tmp;
 	//cout << "######我是第" << i << "趟划分" << endl;
 	return i;
 }
@@ -337,32 +343,32 @@ int FSprint(SqList L){
 	int i = low, j = mid + 1, k = 0;
 	Li1 = (SqList*)malloc((high - low + 1) * sizeof(SqList));
 	while (i <= mid && j <= high) {
-		if (Li->detail[i].flow <= Li->detail[j].flow)
+		if (Li->metro[i].flow <= Li->metro[j].flow)
 		{
-			Li1->detail[k] = Li->detail[i];
+			Li1->metro[k] = Li->metro[i];
 			i++;
 			k++;
 		}
 		else
 		{
-			Li1->detail[k] = Li->detail[j];
+			Li1->metro[k] = Li->metro[j];
 			j++;
 			k++;
 		}
 	}
 	while (i <= mid) {
-		Li1->detail[k] = Li->detail[i];
+		Li1->metro[k] = Li->metro[i];
 		i++; 
 		k++;
 	}
 	while (j <= high) {
-		Li1->detail[k] = Li->detail[j];
+		Li1->metro[k] = Li->metro[j];
 		j++;
 		k++;
 	}
 	for (k = 0, i = low; i <= high; k++, j++)
 	{
-		Li->detail[i] = Li1->detail[k];
+		Li->metro[i] = Li1->metro[k];
 	}
 	free(Li1);
 }
@@ -383,14 +389,14 @@ void Mergesort(SqList Li,int n) {
 
 void bubble(SqList L) {
 	bool flag = 1;
-	metro swap;
+	station swap;
 	for (int i = 0; i < L.length-1; i++) {
 		for (int j = L.length-1; j > i; j--) {
 			flag = 0;
-			if (L.detail[j].flow < L.detail[j - 1].flow) {
-				swap = L.detail[j];
-				L.detail[j] = L.detail[j - 1];
-				L.detail[j - 1] = swap;
+			if (L.metro[j].flow < L.metro[j - 1].flow) {
+				swap = L.metro[j];
+				L.metro[j] = L.metro[j - 1];
+				L.metro[j - 1] = swap;
 				flag = 1;
 			}
 		}
@@ -407,15 +413,15 @@ void BISort(SqList L,int n) {
 	int low = 0;
 	int high = 0;
 	int mid = 0;
-	metro tmp;
+	station tmp;
 	for (i = 1; i < n; i++) {
-		if (L.detail[i].flow < L.detail[i - 1].flow) {
-			tmp = L.detail[i];
+		if (L.metro[i].flow < L.metro[i - 1].flow) {
+			tmp = L.metro[i];
 			low = 0;
 			high = i - 1;
 			while (low <= high) {
 				mid = (low + high) / 2;
-				if (tmp.flow < L.detail[mid].flow) {
+				if (tmp.flow < L.metro[mid].flow) {
 					high = mid - 1;
 				}
 				else {
@@ -423,9 +429,9 @@ void BISort(SqList L,int n) {
 				}
 			}
 			for (j = i - 1; j >= high + 1; j--) {
-				L.detail[j + 1] = L.detail[j];
+				L.metro[j + 1] = L.metro[j];
 			}
-			L.detail[high + 1] = tmp;
+			L.metro[high + 1] = tmp;
 		}
 		
 	}
