@@ -40,6 +40,13 @@ void CreateList(SqList* L, station metro[]) {
 	//L->length = sizeof(&L);
 	L->length = 5;
 }
+void fresh(SqList* L)
+{
+	for (int i = 1; i <= L->length; i++)
+	{
+		L->metro[i-1].mid = i;
+	}
+}
 int Print(SqList* L,int i) {
 	cout << "地铁站ID:" << L->metro[i - 1].mid << endl;
 	cout << "地铁站名:" << L->metro[i - 1].name << endl;
@@ -241,6 +248,7 @@ int adds(SqList* L){
 		L->metro[sid - 1].flow = flow;
 		L->metro[sid - 1].mid = sid;
 		L->length = L->length + 1;
+		fresh(L);
 		cout << "已增加站点" << endl;
 	}
 	else if (choice == "n") {
@@ -264,6 +272,7 @@ int remove(SqList* L) {
 			L->metro[i-1] = L->metro[i];
 		}
 		L->length = L->length - 1;
+		fresh(L);
 		cout << "已删除站点" << endl;
 	}
 	else if (choice == "n") {

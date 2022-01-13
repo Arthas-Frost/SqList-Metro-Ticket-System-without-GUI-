@@ -36,6 +36,7 @@ void window(const char name[10])//窗口管理函数
 
         case 0:
             window("head");
+            cout << "\t清屏：/clear\n" << endl;
             cout << "\t切换身份：/id\n" << endl;
             cout << "\t查询车站信息：/search\n" << endl;
             cout << "\t查询票价：/buy\n" << endl;
@@ -46,6 +47,7 @@ void window(const char name[10])//窗口管理函数
 
         case 1:
             window("head");
+            cout << "\t清屏：/clear\n" << endl;
             cout << "\t切换身份：/id\n" << endl;
             cout << "\t查询车站信息：/search\n" << endl;
             cout << "\t查询票价：/buy\n" << endl;
@@ -109,6 +111,7 @@ void command() //命令控制函数
         string command;
         cout<<"#"; cin >> command;
         if (command == "/id")id_change();
+        else if (command == "/clear")window("main");
         else if (command == "/buy")Price(&L);
         else if (command == "/list")Printall(&L);
         else if (command == "/cost")Cost(&L);
